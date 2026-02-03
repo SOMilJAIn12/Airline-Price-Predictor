@@ -2,9 +2,9 @@ from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 
-app = Flask(__name__)
+application = Flask(__name__)
+app=application
 
-# Load files
 model = pickle.load(open("models/ridge.pkl", "rb"))
 scaler = pickle.load(open("models/scaler.pkl", "rb"))
 cols = pickle.load(open("models/columns.pkl", "rb"))
@@ -22,14 +22,11 @@ def predict():
     stops = float(request.form["total_stops"])
     duration = float(request.form["duration_hours"])
 
-    # Blank row
     input_dict = dict.fromkeys(cols, 0)
 
-    # Set numeric
     input_dict["total_Stops"] = stops
     input_dict["duration_hours"] = duration
 
-    # Set one-hot
     input_dict[f"Airline_{airline}"] = 1
     input_dict[f"Source_{source}"] = 1
     input_dict[f"Destination_{dest}"] = 1
