@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Price Predictor</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(120deg,#1e3c72,#2a5298);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .card{
+            background:white;
+            width:420px;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            color:#2a5298;
+        }
+
+        select,input{
+            width:100%;
+            padding:10px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:14px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        .result{
+            margin-top:20px;
+            padding:12px;
+            background:#eaf2ff;
+            border-radius:6px;
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+            color:#1e3c72;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>✈ Flight Price Prediction</h2>
+
+    <form action="/predict" method="post">
+
+        <select name="airline">
+            <option value="IndiGo">IndiGo</option>
+            <option value="Jet Airways">Jet Airways</option>
+            <option value="Air India">Air India</option>
+            <option value="Multiple carriers">Multiple carriers</option>
+        </select>
+
+        <select name="source">
+            <option value="Delhi">Delhi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Chennai">Chennai</option>
+        </select>
+
+        <select name="destination">
+            <option value="Cochin">Cochin</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Kolkata">Kolkata</option>
+        </select>
+
+        <input type="number" name="total_stops" placeholder="Total Stops">
+        <input type="number" name="duration_hours" placeholder="Duration (Hours)">
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        Predicted Price: ₹ {{ prediction }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
